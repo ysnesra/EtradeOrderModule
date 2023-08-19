@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EtradeOrderModule.Application.Features.Commands.OrderCommand.CreateOrder
+namespace EtradeOrderModule.Application.Features.Commands.OrderCommand.DeleteOrder
 {
-    public class CreateOrderCommandResponse : BaseResponse
+    public class DeleteOrderCommandResponse : BaseResponse
     {
         public string OrderId { get; set; }
-        public CreateOrderCommandResponse(string orderId)
+        public DeleteOrderCommandResponse(string orderId)
         {
             OrderId = orderId;
-            Message = $"The order with ID {orderId} has been successfully created.";
+            Message = $"The order with ID {orderId} has been canceled.";
         }
     }
 }

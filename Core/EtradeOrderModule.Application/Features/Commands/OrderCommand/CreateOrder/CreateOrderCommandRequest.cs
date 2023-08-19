@@ -10,7 +10,6 @@ namespace EtradeOrderModule.Application.Features.Commands.OrderCommand.CreateOrd
     public class CreateOrderCommandRequest :IRequest<CreateOrderCommandResponse>
     {
         public string Address { get; set; }
-       
-       
+            
     }
 }

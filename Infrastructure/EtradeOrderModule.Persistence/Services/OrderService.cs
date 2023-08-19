@@ -20,8 +20,7 @@ namespace EtradeOrderModule.Persistence.Services
         }
 
         public async Task CreateOrderAsync(CreateOrderDto createOrderDto)
-        {
-            
+        {       
             await _orderRepository.AddAsync(new()
             {
                CreatedDate= DateTime.Now,
@@ -47,15 +46,11 @@ namespace EtradeOrderModule.Persistence.Services
             if (order is null)
                 throw new Exception("Order not found");
 
-            Order orderDb = new()
-            {
-                Id = updateOrderDto.Id,
-                BasketId = updateOrderDto.BasketId,
-                CustomerId = updateOrderDto.CustomerId, 
-                Address = updateOrderDto.Address,
-            };
-            return orderDb;
+            order.Address = updateOrderDto.Address;
+            var updatedOrder = await _orderRepository.UpdateAsync(order);
+
+            return updatedOrder;
         }
-      
+
     }
 }

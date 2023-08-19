@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using EtradeOrderModule.Application.DTOs;
+using EtradeOrderModule.Application.Features.Commands.OrderCommand.UpdateOrder;
 using EtradeOrderModule.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace EtradeOrderModule.Application.Mapping
 {
@@ -14,6 +11,8 @@ namespace EtradeOrderModule.Application.Mapping
         public MappingProfile()
         {
             CreateMap<Order, CreateOrderDto>().ReverseMap();
+            CreateMap<UpdateOrderCommandRequest, UpdateOrderDto>().ReverseMap();
+            //CreateMap<UpdateOrderDto, Order>();
         }
     }
 }

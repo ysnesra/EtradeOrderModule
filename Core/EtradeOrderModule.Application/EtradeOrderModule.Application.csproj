@@ -9,8 +9,6 @@
   <ItemGroup>
     <Folder Include="Enums\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="Features\Commands\OrderCommand\DeleteOrder\" />
-    <Folder Include="Features\Commands\OrderCommand\UpdateOrder\" />
     <Folder Include="Features\Queries\Order\" />
     <Folder Include="Helpers\" />
     <Folder Include="ViewModels\" />

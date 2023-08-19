@@ -17,6 +17,7 @@ namespace EtradeOrderModule.Application
         {           
             servis.AddMediatR(Assembly.GetExecutingAssembly());
             servis.AddAutoMapper(typeof(MappingProfile));
+            servis.AddHttpClient();
         }
     }
 }
