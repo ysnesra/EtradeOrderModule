@@ -18,7 +18,7 @@ namespace EtradeOrderModule.Application.Repositories
                                         Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
                                         bool enableTracking = true,
                                         CancellationToken cancellationToken = default);
-        Task<bool> AddAsync(T entity);
+        Task<T> AddAsync(T entity);
         Task<T> UpdateAsync(T entity);
         Task<bool> DeleteAsync(T entity);
     }

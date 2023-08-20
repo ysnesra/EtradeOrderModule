@@ -50,11 +50,11 @@ namespace EtradeOrderModule.Persistence.Repositories
             return _context.Set<T>();
         }
 
-        public async Task<bool> AddAsync(T entity)
+        public async Task<T> AddAsync(T entity)
         {
             _context.Entry(entity).State = EntityState.Added;
             await _context.SaveChangesAsync();
-            return true;
+            return entity;
         }
 
         public async Task<T> UpdateAsync(T entity)

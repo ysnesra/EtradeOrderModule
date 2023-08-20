@@ -17,7 +17,7 @@ namespace EtradeOrderModule.Application.Repositories
         IQueryable<T> GetList(Expression<Func<T, bool>>? predicate = null,
                              Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
                              Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
-                             bool enableTracking = true);  
+                             bool enableTracking = true);
         bool Add(T entity);
         T Update(T entity);
         bool Delete(T entity);

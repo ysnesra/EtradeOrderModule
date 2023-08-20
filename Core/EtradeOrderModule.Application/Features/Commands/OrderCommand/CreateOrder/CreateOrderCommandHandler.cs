@@ -16,18 +16,17 @@ namespace EtradeOrderModule.Application.Features.Commands.OrderCommand.CreateOrd
             _orderService = orderService;
             _mapper = mapper;
         }
-
         public async Task<CreateOrderCommandResponse> Handle(CreateOrderCommandRequest request, CancellationToken cancellationToken)
-        {   
-            Order orderdb = new() 
+        {
+            Order orderdb = new()
             {
-                Address=request.Address,
-                BasketId=Guid.NewGuid().ToString(),
-                CustomerId=Guid.NewGuid().ToString()
+                Address = request.Address,
+                BasketId = Guid.NewGuid().ToString(),
+                CustomerId = Guid.NewGuid().ToString()
             };
             CreateOrderDto orderDto = _mapper.Map<CreateOrderDto>(orderdb);
-            await _orderService.CreateOrderAsync(orderDto);
-            return new(orderdb.Id);
+            var newOrder = await _orderService.CreateOrderAsync(orderDto);
+            return new(newOrder.Id);
         }
     }
 }

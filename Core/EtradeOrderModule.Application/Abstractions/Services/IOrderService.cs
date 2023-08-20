@@ -10,7 +10,7 @@ namespace EtradeOrderModule.Application.Abstractions.Services
 {
     public interface IOrderService
     {
-        Task CreateOrderAsync(CreateOrderDto createOrderDto);
+        Task<Order> CreateOrderAsync(CreateOrderDto createOrderDto);
         Task<Order> UpdateOrderAsync(UpdateOrderDto updateOrderDto);
         Task RemoveOrderAsync(string id);
 

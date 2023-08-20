@@ -1,5 +1,6 @@
 ﻿using EtradeOrderModule.Application.Abstractions.Services;
 using EtradeOrderModule.Application.DTOs;
+using EtradeOrderModule.Application.Exceptions;
 using EtradeOrderModule.Application.Repositories;
 using EtradeOrderModule.Domain.Entities;
 using System;
@@ -19,23 +20,24 @@ namespace EtradeOrderModule.Persistence.Services
             _orderRepository = orderRepository;
         }
 
-        public async Task CreateOrderAsync(CreateOrderDto createOrderDto)
-        {       
-            await _orderRepository.AddAsync(new()
+        public async Task<Order> CreateOrderAsync(CreateOrderDto createOrderDto)
+        {
+            var newOrder = await _orderRepository.AddAsync(new()
             {
-               CreatedDate= DateTime.Now,
-               BasketId=createOrderDto.BasketId,
-               CustomerId=createOrderDto.CustomerId, 
-               Address=createOrderDto.Address,
-         
-            });         
+                CreatedDate = DateTime.Now,
+                BasketId = createOrderDto.BasketId,
+                CustomerId = createOrderDto.CustomerId,
+                Address = createOrderDto.Address,
+
+            });
+            return newOrder;
         }
 
         public async Task RemoveOrderAsync(string id)
         {
             Order? order= await _orderRepository.GetAsync(x=>x.Id==id);
             if(order is null)
-                throw new Exception("Order not found");
+                throw new NotFoundOrderException();
             order.IsDeleted = true;
             await _orderRepository.UpdateAsync(order);
         }
@@ -44,7 +46,10 @@ namespace EtradeOrderModule.Persistence.Services
         {
             Order? order = await _orderRepository.GetAsync(x => x.Id == updateOrderDto.Id);
             if (order is null)
-                throw new Exception("Order not found");
+                throw new NotFoundOrderException();
+            //Silindiyse Güncellenemesin
+            if (order.IsDeleted)
+                throw new UpdateControlException();
 
             order.Address = updateOrderDto.Address;
             var updatedOrder = await _orderRepository.UpdateAsync(order);
